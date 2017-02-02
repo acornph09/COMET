@@ -1,0 +1,104 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/registerstyle.css' %}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+
+<div class ="container-fluid">
+    <div class="row background">
+        <div class = "col-md-12">
+            <h1 id="header-id">Quiver Registration</h1>
+        </div>
+        <form method="post" action=".?next={{ redirect_to }}"> {% csrf_token %}
+            {{ form }}
+            <div class = "row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 offset1">
+                        <legend>Account Information</legend>
+                        <div class="form-group col-lg-12">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" id="username_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" id="password_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Email Address</label>
+                            <input type="" name="email" class="form-control" id="email_input" value="">
+                        </div>
+
+                        <legend>Educational Background</legend>
+
+                        <div class="form-group col-lg-12">
+                            <label>School</label>
+                            <input type="" name="school" class="form-control" id="school_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Degree</label>
+                            <input type="" name="degree" class="form-control" id="degree_input" value="">
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <legend>Basic User Information</legend>
+                        <div class="form-group col-lg-12">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" class="form-control" id="firstname_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Middle Name</label>
+                            <input type="text" name="middle_name" class="form-control" id="middlename_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" class="form-control" id="lastname_input" value="">
+                        </div>
+
+
+
+                        <legend>Contact Information</legend>
+                        <div class="form-group col-lg-12">
+                            <label>Mobile Number</label>
+                            <input type="" name="mobile_number" class="form-control" id="mobilenum_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Telephone Number</label>
+                            <input type="" name="telephone_number" class="form-control" id="telenum_input" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <a href="/login/"><button type="" class="btn btn-primary">Cancel</button></a>
+                    </div>
+                    <div class="col-md-5"></div>
+            </form>
+            </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,35 @@
+.login{
+    color: green;
+}
+
+.page-header{
+    font-family: Calibri;
+    color: white;
+}
+
+
+body{
+}
+
+.background{
+        background-color: #77dd77;
+}
+
+.links {
+    color: white;
+}
+
+.card{
+font-family: Calibri;
+    margin:0 auto;
+}
+
+.login-labels, #emailHelp{
+    float:left;
+}
+
+.form-group{
+    line-height:30px;
+}
+
+
