@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^blog/$', views.Blog),
     url(r'^register/$', views.Register),
     url(r'^admin/', admin.site.urls),
+    url(r'^reg_success/$', views.Success),
+    url(r'^error/$', views.LogInError)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

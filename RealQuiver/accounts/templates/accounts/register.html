@@ -1,0 +1,105 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load i18n widget_tweaks %}
+{% block content %}
+<div class ="container-fluid">
+    <div class = "row">
+        <div class = "col-md-3 col-md-offset-0">
+            <h1 class="cover-heading">{{ title }}</h1>
+        </div>
+    </div>
+        <form class="form-horizontal" method="POST" action=".?next={{ redirect_to }}"> {% csrf_token %}
+            <div class = "row">
+
+                <div class="col-lg-4 col-lg-offset-0">
+                    <legend>Account Information</legend>
+                    <div class="form-group col-lg-12">
+                        <label>E-mail</label>
+                        {{ form.email |attr:"class:form-control"  }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>First Name</label>
+                        {{ form.first_name|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Middle Name</label>
+                        {{ form.middle_name|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Last Name</label>
+                        {{ form.last_name|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Password</label>
+                        {{ form.password1|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Password Repeat</label>
+                        {{ form.password2|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <a href="/login/" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+{% endblock content %}
+<!--
+                    <div class="col-md-5">
+
+                        <legend>Basic User Information</legend>
+                        <div class="form-group col-lg-12">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" class="form-control" id="firstname_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Middle Name</label>
+                            <input type="text" name="middle_name" class="form-control" id="middlename_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" class="form-control" id="lastname_input" value="">
+                        </div>
+
+
+
+                        <legend>Contact Information</legend>
+                        <div class="form-group col-lg-12">
+                            <label>Mobile Number</label>
+                            <input type="" name="mobile_number" class="form-control" id="mobilenum_input" value="">
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label>Telephone Number</label>
+                            <input type="" name="telephone_number" class="form-control" id="telenum_input" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <a href="/accounts/"><button type="" class="btn btn-primary">Cancel</button></a>
+                    </div>
+                    <div class="col-md-5"></div>
+            </form>
+            </div>
+<</div>-->
+
+
+
+

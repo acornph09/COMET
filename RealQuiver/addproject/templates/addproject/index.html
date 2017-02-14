@@ -1,0 +1,60 @@
+
+{% extends "accounts/base.html" %}
+{% load i18n widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class = "container">
+    <div class = "background">
+         <div class ="row navbar">
+            <nav class="navbar navbar-default">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/homescreen/"><img src="{% static 'accounts/images/QuiverLogo.png' %}" width="20px";><span class="sr-only">(current)</span></a></li>
+                        <li><a href="/addproject/">Profile</a></li>
+                        <li class="active"><a href="/addproject/">Projects</a></li>
+                        <li><a href="/addproject/">Portfolios</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form class="navbar-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </form>
+                        </li>
+                        <li><a href="/addproject/">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="row content">
+            <div class = "row projectview">
+                <div class="col-lg-6">
+                    <legend>View Projects</legend>
+                </div>
+            </div>
+            <div class = "row projectupload">
+                <div class="col-lg-6">
+                    <legend>Project Upload</legend>
+                    <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <input type="file" name="project">
+                        <button type="submit">Add project</button>
+                    </form>
+
+                    {% if uploaded_file_url %}
+                    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+
+{% endblock content %}

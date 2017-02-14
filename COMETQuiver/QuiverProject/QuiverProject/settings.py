@@ -40,6 +40,10 @@ INSTALLED_APPS = (
     'login',
 )
 
+#CUSTOM_USER
+AUTH_USER_MODEL = 'login.CustomUser'
+AUTHENTICATION_BACKENDS = ['login.backends.CustomUserAuth']
+
 LOGIN_URL = '/login/'
 
 MIDDLEWARE_CLASSES = (
@@ -81,7 +85,7 @@ WSGI_APPLICATION = 'QuiverProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'quiverDB'),
     }
 }
 
