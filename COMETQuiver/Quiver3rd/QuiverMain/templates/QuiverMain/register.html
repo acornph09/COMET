@@ -1,0 +1,66 @@
+{% extends "QuiverMain/base.html" %}
+{% load static %}
+{% load i18n widget_tweaks %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'QuiverMain/css/registerstyle.css' %}" />
+{% endblock css %}
+
+{% block bodytag %}id="bg" style="background-image: url('{% static "QuiverMain/images/background-dlsu.jpg" %}')";{% endblock bodytag %}
+
+{% block content %}
+<div class ="container-fluid">
+    <div class = "row">
+        <div class = "col-md-3 col-md-offset-4">
+            <h1 id="head-message">{{ title }}</h1>
+        </div>
+    </div>
+        <form class="form-horizontal" method="POST" action=".?next={{ redirect_to }}"> {% csrf_token %}
+            <div class = "row">
+
+                <div class="col-lg-4 col-lg-offset-4">
+                    <legend class="legend-text">Account Information</legend>
+                    <div class="form-group col-lg-12">
+                        <label>E-mail</label>
+                        {{ form.email |attr:"class:form-control"  }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Username</label>
+                        {{ form.username |attr:"class:form-control"  }}
+                    </div>
+
+
+                    <div class="form-group col-lg-12">
+                        <label>Password</label>
+                        {{ form.password1|attr:"class:form-control" }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Password Repeat</label>
+                        {{ form.password2|attr:"class:form-control" }}
+                    </div>
+
+                    <legend class="legend-text">User Information</legend>
+                    <div class="form-group col-lg-12">
+                        <label>First Name</label>
+                        {{ form.first_name |attr:"class:form-control form-control-sm"  }}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label>Last Name</label>
+                        {{ form.last_name |attr:"class:form-control"  }}
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+
+                    <div class="form-group col-lg-">
+                        <a href="/login/" class="btn btn-danger">Cancel</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+</div>
+{% endblock content %}

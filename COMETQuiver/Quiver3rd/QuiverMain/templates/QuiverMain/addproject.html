@@ -1,0 +1,52 @@
+{% extends "QuiverMain/mainbase.html" %}
+{% load i18n widget_tweaks %}
+{% load static %}
+{% block css %}
+
+{% endblock css %}
+
+{% block title %}<title>Projects</title> {% endblock title %}
+
+{% block bodytag %} {% endblock bodytag %}
+
+{% block content %}
+<div class="row content" style="margin-top:0;">
+    <div class = "row projectview">
+        <div class="col-lg-6">
+            <legend>View Projects</legend>
+        </div>
+    </div>
+    <div class = "row projectupload">
+        <div class="col-lg-6">
+            <legend>Project Upload</legend>
+            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{project_file_form.project_file}}
+
+                <div class="form-group col-lg-12">
+                    <label>Name</label>
+                    {{ project_details_form.project_name|attr:"class:form-control" }}
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <label>Description</label>
+                    {{ project_details_form.project_description|attr:"class:form-control" }}
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <label>Tags</label>
+                    {{ tags_form.tag_name|attr:"class:form-control" }}
+                </div>
+
+                <button class="btn btn-primary" type="submit">Add project</button>
+            </form>
+
+                    <!--{% if uploaded_file_url %}
+                    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                    {% endif %}-->
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

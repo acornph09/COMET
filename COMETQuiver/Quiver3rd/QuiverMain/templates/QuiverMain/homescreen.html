@@ -1,0 +1,33 @@
+{% extends "QuiverMain/mainbase.html" %}
+{% load i18n widget_tweaks %}
+{% load static %}
+{% block css %}
+
+{% endblock css %}
+
+{% block title %}<title>Home</title> {% endblock title %}
+
+{% block bodytag %} {% endblock bodytag %}
+
+
+{%if user.is_authenticated %}
+{% block content %}
+
+
+
+{% endblock content %}
+{% endif %}
+
+
+<!---
+<h1>Quiver Home Page</h1>
+
+<h3>Welcome {{user.first_name}} ({{user.email}}) you are now logged in!</h3>
+
+<a href="/addproject/">Add</a>
+{% if user.is_authenticated %}
+    <a href="/logout/">Logout</a>
+{% else %}
+    <a href="/login/?next={{ request.path }}">Login</a>
+{% endif %}
+---->

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<html>
+    <head>
+        {% block title %}<title></title>{% endblock title %}
+
+        {% block css %} {% endblock css %}
+        <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    </head>
+
+    <body {% block bodytag %} {% endblock bodytag %}>
+
+        <div class ="container">
+            <div class ="row navbar" style="margin-bottom:0;">
+                <nav class="navbar navbar-default">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{% url 'home' %}"><img src="{% static 'QuiverMain/images/QuiverLogo.png' %}" width="20px";><span class="sr-only">(current)</span></a></li>
+                            <li><a href="{% url 'project page' %}">Projects</a></li>
+                            <li><a href="{% url 'project page' %}">Portfolios</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <form class="navbar-form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Search</button>
+                                </form>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'user profile' user.username %}">{{user.first_name}}</a></li>
+                                    <li><a href="{% url 'update profile' %}">Edit Profile</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/logout/">Logout</a></li>
+                              </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+        {% block javascript %}
+        {% endblock javascript %}
+    </body>
+</html>

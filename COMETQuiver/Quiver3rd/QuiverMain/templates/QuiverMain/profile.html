@@ -1,0 +1,54 @@
+{% extends "QuiverMain/mainbase.html" %}
+{% load static %}
+{% load i18n widget_tweaks %}
+{% block css %}
+
+{% endblock css %}
+
+{% block title %}<title>Profile - {{user.first_name}} {{user.last_name}}</title> {% endblock title %}
+
+{% block bodytag %} {% endblock bodytag %}
+
+{% block content %}
+<div class = "row content" style="margin-top:0;">
+    <div class = "row header">
+        <div class = "col-md-3">
+            <h1 id="head-message">{{ title }}</h1>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-lg-3 prof-pic">
+            <img src="{{user.userprofile.profile_picture.url}}" width="200px">
+        </div>
+
+        <div class = "col-lg-9 col-info">
+            <div class = "row row-info">
+
+                <div class="col-lg-6">
+                    <h4>Name: {{user.first_name}} {{user.last_name}}</h4>
+
+                </div>
+                <div class="col-lg-6">
+                    <h4>Email: {{user.email}}</h4>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4>School: {{user.userprofile.school}}</h4>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4>Degree: {{user.userprofile.degree}}</h4>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4>Mobile Number: {{user.userprofile.mobile_number}}</h4>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4>Telephone Number: {{user.userprofile.telephone_number}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,41 @@
+
+#bg{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#header-id{
+    font-family : Century Gothic;
+    font-weight: bold;
+    margin: 0 auto;
+    font-size: 50pt;
+
+}
+
+#head-message{
+    color: white;
+}
+
+label{
+    color: white;
+}
+
+.legend-text{
+    color: white;
+}
+
+.registrationform-side1{
+    width:40%;
+    margin-left:20px;
+}
+
+.formcontainer{
+    margin-left: 20px;
+}
+
+
