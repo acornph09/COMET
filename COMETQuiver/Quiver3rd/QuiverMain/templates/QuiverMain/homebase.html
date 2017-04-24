@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n widget_tweaks %}
 {% block css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'QuiverMain/css/homebasestyle.css' %}" />
 {% endblock css %}
 
 {% block bodytag %} {% endblock bodytag %}
@@ -10,11 +10,20 @@
 {% block content %}
 <div class ="container">
     <div class ="row navbar">
-            <nav class="navbar navbar-default">
+        <nav class="navbar navbar-ian navbar-fixed-top">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{%url 'home' %}"><img src="{% static 'schematicsapp/images/skematik.png' %}" width="150px"; style=";margin-right:10px;margin-bottom:200px;"></a>
+            </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
                         <li><a href="/homescreen/"><img src="{% static 'QuiverMain/images/QuiverLogo.png' %}" width="20px";><span class="sr-only">(current)</span></a></li>
                         <li><a href="/addproject/">Projects</a></li>
                         <li><a href="/addproject/">Portfolios</a></li>
@@ -40,8 +49,8 @@
                           </ul>
                         </li>
                     </ul>
-                </div>
-            </nav>
+            </div><!-- /.navbar-collapse -->
+        </nav>
         </div>
 </div>
 {% endblock content %}

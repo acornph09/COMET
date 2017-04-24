@@ -18,15 +18,15 @@
     </div>
     <div class = "row">
         <div class="col-lg-3 prof-pic">
+            {% if user.userprofile.profile_picture%}
             <img src="{{user.userprofile.profile_picture.url}}" width="200px">
+            {% endif %}
         </div>
 
         <div class = "col-lg-9 col-info">
             <div class = "row row-info">
-
                 <div class="col-lg-6">
                     <h4>Name: {{user.first_name}} {{user.last_name}}</h4>
-
                 </div>
                 <div class="col-lg-6">
                     <h4>Email: {{user.email}}</h4>

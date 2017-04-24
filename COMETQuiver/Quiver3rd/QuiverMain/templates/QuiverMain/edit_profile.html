@@ -10,90 +10,237 @@
 {% block bodytag %} {% endblock bodytag %}
 
 {% block content %}
-    <div class = "row">
-        <div class = "col-md-3">
-            <h1 id="head-message">{{title}}</h1>
-        </div>
-    </div>
-    <div>
-        <form class="form-horizontal" method="POST" action=".?next={{ redirect_to }}" enctype="multipart/form-data"> {% csrf_token %}
-            <div class = "row">
-                <legend class="legend-text">User Information</legend>
-
-                <div class="form-group col-lg-12">
-                    <label>First Name</label>
-                    <div class="form-group col-lg-12">
-                        {{ user_form.first_name|attr:"class:form-control" }}
-                    </div>
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Last Name</label>
-                    <div class="form-group col-lg-12">
-                        {{ user_form.last_name|attr:"class:form-control" }}
-                    </div>
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Profile Picture</label>
-                    <div class="form-group col-lg-12">
-                        {{ profile_form.profile_picture  }}
-                    </div>
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Biography</label>
-                    <div class="form-group col-lg-12">
-                        {{ profile_form.bio |attr:"class:form-control"   }}
-                    </div>
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Gender</label>
-                    <div class="form-group col-lg-12">
-                        {{ profile_form.gender |attr:"class:form-control"  }}
-                    </div>
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Birthday</label>
-                    <div class="form-group col-lg-12">
-                        {{ profile_form.birth_date |attr:"class:form-control"  }}
-                    </div>
-                </div>
-
-
-                <legend class="legend-text">Educational Background</legend>
-                <div class="form-group col-lg-12">
-                    <label>School</label>
-                    {{ profile_form.school |attr:"class:form-control"  }}
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Degree</label>
-                    {{ profile_form.degree |attr:"class:form-control"  }}
-                </div>
-
-                <legend class="legend-text">Contact Information</legend>
-                <div class="form-group col-lg-12">
-                    <label>Mobile Number</label>
-                    {{ profile_form.mobile_number |attr:"class:form-control"  }}
-                </div>
-
-                <div class="form-group col-lg-12">
-                    <label>Telephone</label>
-                    {{ profile_form.telephone_number |attr:"class:form-control"  }}
-                </div>
-
-                <div class="form-group col-lg-3">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-
-                <div class="form-group col-lg-3">
-                    <a href="/homescreen/" class="btn btn-danger">Cancel</a>
+<div class="container-fluid">
+    <div class = "row main-content">
+        <div class= "col-lg-10 col-lg-offset-1">
+            <div class="row head">
+                <div class = "col-lg-4">
+                    <h1 id="head-message">{{title}}</h1>
                 </div>
             </div>
-        </form>
-    </div>
 
+            <div class="row edit-prof-content">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" method="POST" action=".?next={{ redirect_to }}" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="row panel-row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-info">
+
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">Basic User Information</h1>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="row userinfo-panel">
+                                                <div class="col-lg-10 col-lg-offset-1">
+
+                                                    <div class="row userinfo-1">
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> First Name</span>
+                                                                    {{ user_form.first_name|attr:"class:form-control" }}
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        <div class="col-lg-5 col-lg-offset-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> Last Name</span>
+                                                                    {{ user_form.last_name|attr:"class:form-control" }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            <!--
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                                                    {{ user_form.email |attr:"class:form-control"  }}
+                                                </div>
+                                            </div>
+                                            -->
+                                            <!--
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    <input type="password" class="form-control" placeholder="New Password" />
+                                                </div>
+                                            </div>
+                                            -->
+                                                    <div class="row userinfo-2">
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="fa fa-intersex"></span> Gender</span>
+                                                                    {{ profile_form.gender |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5 col-lg-offset-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>  Birthday</span>
+                                                                    {{ profile_form.birth_date |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel panel-info">
+
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">Contact Information</h1>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="row contactinfo-panel">
+                                                <div class="col-lg-10 col-lg-offset-1">
+                                                    <div class="row contact-numbers">
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span> Mobile Number</span>
+                                                                {{ profile_form.mobile_number |attr:"class:form-control"  }}
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5 col-lg-offset-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span> Telephone Number</span>
+                                                                    {{ profile_form.telephone_number |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row address">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span> Address</span>
+                                                                    {{ profile_form.address |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="panel panel-default">
+                                    <div class="panel panel-info">
+
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">Educational Background</h1>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="row educationinfo-panel">
+                                                <div class="col-lg-10 col-lg-offset-1">
+                                                    <div class="row school">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span> School</span>
+                                                                {{ profile_form.school |attr:"class:form-control"  }}
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row degree">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span> Degree</span>
+                                                                    {{ profile_form.degree |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel panel-info">
+
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">Additional Information</h1>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="row additionalinfo-panel">
+                                                <div class="col-lg-10 col-lg-offset-1">
+                                                    <div class="row bio">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span> Biography</span>
+                                                                    {{ profile_form.bio |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row website">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span> Website</span>
+                                                                    {{ profile_form.website |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row alt-email">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span> Secondary Email</span>
+                                                                    {{ profile_form.alternative_email |attr:"class:form-control"  }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row buttons-content">
+                                    <div class="col-lg-10 col-lg-offset-1">
+
+                                        <div class="row transaction2buttons">
+                                            <div class="col-lg-6 col-lg-offset-5">
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div2
+                                            <div class="col-lg-6 col-lg-offset-5">
+                                                <a href="/homescreen/" class="btn btn-danger">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -2,61 +2,92 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from QuiverMain.forms import (UserCreationForm, UserProfileForm, EmailAuthenticationForm, ProjectFileForm,
-                              UserForm, AddTagsForm, ProjectDetailsForm)
+                              UserForm, AddTagsForm, ProjectDetailsForm, BaseTagFormSet)
 from django.contrib.auth import (
 authenticate,
 get_user_model,
 login,
 logout,
 )
-
+from django.forms import modelformset_factory, inlineformset_factory
 from django.contrib import auth
 from django.contrib.auth.models import User
-from QuiverMain.models import UserProject
-
+from QuiverMain.models import UserProject, ProjectFile, Project, Tag
+from QuiverMain.forms import AddTagsForm
 
 @login_required
-def add_project_view(request):
+def portfolio_view(request):
     if request.session.has_key('username'):
         username = request.session['username']
         request.session.set_expiry(18000)
         if request.method == 'POST':
+            portfolio_details_form = ProjectDetailsForm(request.POST)
+            print(portfolio_details_form.errors)
+            print(portfolio_details_form.is_valid)
+            print('Details End')
+            if portfolio_details_form.is_valid():
+                portfolio_detail_instance = portfolio_details_form.save(commit=False)
+                portfolio_detail_instance.save()
+                userportfolio_instance = UserProject()
+                userportfolio_instance.user = request.user
+                userportfolio_instance.portfolio = portfolio_detail_instance
+                userportfolio_instance.save()
+            return HttpResponseRedirect('/homescreen/')
+        else:
+            portfolio_file_form = ProjectFileForm()
+            portfolio_details_form = ProjectDetailsForm()
+            tags_form = AddTagsForm()
+    else:
+        return HttpResponseRedirect("/login/")
+
+    return render(request, 'QuiverMain/portfolio.html', {'portfolio_file_form' : portfolio_file_form,
+                                                          'portfolio_details_form' : portfolio_details_form,
+                                                          'tags_form' : tags_form})
+
+@login_required
+def add_project_view(request):
+
+    #Django Built-in Sessions Key
+    if request.session.has_key('username'):
+        username = request.session['username']
+        request.session.set_expiry(18000)
+        #DB Queries for Project View
+        user_projects_queryset = UserProject.objects.filter(user_id=request.user)
+        projects_queryset = Project.objects.filter(id__in=user_projects_queryset.values('project_id'))
+        tags_queryset = Tag.objects.filter(id__in=user_projects_queryset.values('project_id'))
+
+        TagFormSet = inlineformset_factory(Project, Tag, form=AddTagsForm, extra=1, can_delete=True)
+        #Saving Project Detail Forms
+        if request.method == 'POST':
             project_file_form = ProjectFileForm(request.POST, request.FILES)
             project_details_form = ProjectDetailsForm(request.POST)
-            tags_form = AddTagsForm(request.POST)
-            print(project_details_form.errors)
-            print(project_details_form.is_valid)
-            print('Details End')
-            print(project_file_form.errors)
-            print(project_file_form.is_valid)
-            print('File End')
-            print(tags_form.errors)
-            print(tags_form.is_valid)
-            print('Tags')
-            if project_details_form.is_valid() and project_file_form.is_valid() and tags_form.is_valid():
+
+            if project_details_form.is_valid() and project_file_form.is_valid():
+
                 project_detail_instance = project_details_form.save(commit=False)
                 project_detail_instance.save()
                 project_file_instance = project_file_form.save(commit=False)
                 project_file_instance.project = project_detail_instance
                 project_file_instance.save()
-                tags_instance = tags_form.save(commit=False)
-                tags_instance.project = project_detail_instance
-                tags_instance.save()
+                tag_formset = TagFormSet(request.POST, instance=project_detail_instance, prefix="tags")
+                if tag_formset.is_valid():
+                    tag_formset.save()
                 userproject_instance = UserProject()
                 userproject_instance.user = request.user
                 userproject_instance.project = project_detail_instance
                 userproject_instance.save()
-            return HttpResponseRedirect('/homescreen/')
+            return HttpResponseRedirect('/project/')
         else:
             project_file_form = ProjectFileForm()
             project_details_form = ProjectDetailsForm()
-            tags_form = AddTagsForm()
+            tag_formset = TagFormSet()
     else:
         return HttpResponseRedirect("/login/")
-
-    return render(request, 'QuiverMain/addproject.html', {'project_file_form' : project_file_form,
-                                                          'project_details_form' : project_details_form,
-                                                          'tags_form' : tags_form})
+    return render(request, 'QuiverMain/addproject.html', {'project_file_form': project_file_form,
+                                                          'project_details_form': project_details_form,
+                                                          'tag_formset' : tag_formset,
+                                                          'projects': projects_queryset,
+                                                          'tags_list': tags_queryset})
 
 
 
@@ -95,7 +126,7 @@ def edit_profile(request):
             profile_form = UserProfileForm(instance=request.user.userprofile)
 
     return render(request, 'QuiverMain/edit_profile.html', {
-        'title':'User Profile',
+        'title':'Edit Profile Information',
         'user_form': user_form,
         'profile_form': profile_form,
     })
@@ -163,7 +194,7 @@ def login_view(request):
                     print(user)
                     if user.is_active:
                         auth.login(request, user)
-                        request.session['username']=username
+                        request.session['username'] = username
                         return HttpResponseRedirect('/homescreen/')
         return render(request, 'QuiverMain/login.html', {
             "title": "Quiver Sign-Up",

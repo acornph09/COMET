@@ -7,8 +7,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
 from QuiverMain.models import UserProfile
 from django.forms import extras
-from QuiverMain.models import ProjectFile, Project, Tag, UserProject
-
+from django.forms import BaseModelFormSet
+from django.forms import modelformset_factory
+from QuiverMain.models import ProjectFile, Project, Tag, UserProject, Portfolio
+from django.forms.formsets import BaseFormSet
 
 class AddTagsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -18,6 +20,13 @@ class AddTagsForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ('tag_name',)
+class BaseTagFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super(BaseTagFormSet,self).__init__(*args, **kwargs)
+        self.queryset = Tag.objects.none()
+
+class FormsetForm(forms.Form):
+    delete= forms.BooleanField(required=False, initial=False)
 
 
 class ProjectDetailsForm(forms.ModelForm):
@@ -25,11 +34,26 @@ class ProjectDetailsForm(forms.ModelForm):
         # first call parent's constructor
         super(ProjectDetailsForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
+        self.fields['project_name'].error_messages['required'] = 'This field is required. Please enter a Project Name.'
         self.fields['project_description'].required = False
 
     class Meta:
         model = Project
         fields = ('project_name', 'project_description',)
+
+
+
+class PortfolioForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        # first call parent's constructor
+        super(PortfolioForm, self).__init__(*args, **kwargs)
+        # there's a `fields` property now
+
+    class Meta:
+        model = Portfolio
+        fields = ('portfolio_title', 'number_of_projects', 'portfolio_type',)
+
+
 
 #Fix Project Field
 class ProjectFileForm(forms.ModelForm):
@@ -50,6 +74,7 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name',)
 
 
+
 class UserProfileForm(forms.ModelForm):
     birth_date = forms.DateField(widget=extras.SelectDateWidget)
     def __init__(self, *args, **kwargs):
@@ -64,11 +89,17 @@ class UserProfileForm(forms.ModelForm):
         self.fields['gender'].required = False
         self.fields['bio'].required = False
         self.fields['profile_picture'].required = False
+        self.fields['address'].required = False
+        self.fields['alternative_email'].required = False
+        self.fields['website'].required = False
 
     class Meta:
         model = UserProfile
         fields = ('school', 'degree', 'mobile_number', 'telephone_number', 'birth_date', 'gender', 'bio',
-                  'profile_picture',)
+                  'profile_picture', 'address', 'alternative_email', 'website',)
+        widgets = {"bio": forms.Textarea}
+
+
 
 
 class EmailAuthenticationForm(AuthenticationForm):

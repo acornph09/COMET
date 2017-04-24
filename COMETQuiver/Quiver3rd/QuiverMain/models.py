@@ -15,7 +15,7 @@ class Portfolio(models.Model):
 
 
 class Project(models.Model):
-    project_name = models.CharField(max_length=255, default='no project name')
+    project_name = models.CharField(max_length=255, null=True)
     project_description = models.CharField(max_length=500, null=True)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -26,7 +26,7 @@ class ProjectFile(models.Model):
 
 
 class Tag(models.Model):
-    tag_name = models.CharField(max_length=100, default='no tags')
+    tag_name = models.CharField(max_length=100, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
 
 class ProjectPortfolio(models.Model):
@@ -45,15 +45,18 @@ class UserProfile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     school = models.CharField(_('school'), max_length=127, null=True)
     degree = models.CharField(_('degree'), max_length=127, null=True)
-    address = models.CharField(_('address'), max_length=255, null=True)
+    address = models.CharField(_('address'), max_length=254, null=True)
     mobile_number = models.CharField(_('mobile number'), max_length=12, null=True)
     telephone_number = models.CharField(_('telephone number'), max_length=12, null=True)
     birth_date = models.DateTimeField(_('birthday'), null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
     bio = models.CharField(_('biography'), max_length=500, null=True)
     profile_picture = models.ImageField(_('profile_picture'), blank=True, upload_to='accounts/avatar/')
+    website = models.CharField(_('website'), null=True, max_length=254)
+    alternative_email = models.EmailField(_('alternative_email'), null=True, max_length=254)
 
 
     @receiver(post_save, sender=User)

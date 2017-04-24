@@ -1,0 +1,118 @@
+{% extends "QuiverMain/mainbase.html" %}
+{% load i18n widget_tweaks %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'QuiverMain/css/view_projectstyle.css' %}" />
+{% endblock css %}
+
+{% block title %}<title>Projects</title> {% endblock title %}
+
+{% block bodytag %} {% endblock bodytag %}
+{% block javascript %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'path_to/jquery.formset.js' %}"></script>
+{% endblock javascript %}
+{% block content %}
+<div class="row content">
+    <div class="col-lg-12">
+
+        <!-----------------------PROJECT UPLOAD------------------------------>
+        <div class = "row projectupload">
+            <div class="col-lg-12">
+                <legend>Project Upload</legend>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addProjectModal">Add Project</button>
+                <!-- Modal -->
+                <div id="addProjectModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Projects</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal row">
+                                    <div class="col-lg-12">
+                                        <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="form-group col-lg-12">
+                                                <label>File</label><br>
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Choose File</span>
+                                                    {{project_file_form.project_file | attr:"class:upload"}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-lg-12">
+                                                <label>Name</label>
+                                                {{ project_details_form.project_name|attr:"class:form-control" }}
+                                            </div>
+
+                                            <div class="form-group col-lg-12">
+                                                <label>Description</label>
+                                                {{ project_details_form.project_description|attr:"class:form-control" }}
+                                            </div>
+                                            {{ tag_formset.management_form }}
+                                            {% for tag_form in tag_formset %}
+                                            <div class="link-formset">
+                                                {{ tag_form.id }}
+                                                {{ tag_form.tag_name | attr:"class:form-control" }}
+                                            </div>
+                                            {% endfor %}
+                                            <button class="btn btn-primary" type="submit">Add Project</button>
+                                        </form>
+                                    </div>
+                                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'path_to/jquery.formset.js' %}"></script>
+<script>
+    $('.link-formset').formset({
+        addText: 'add link',
+        deleteText: 'remove'
+    });
+</script>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <!--{% if uploaded_file_url %}
+                        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                        {% endif %}-->
+            </div>
+        </div>
+
+        <!-----------------------THIS IS A BUFFER/PADDING------------------------------>
+        <div class="row top-buffer-30"></div>
+
+        <!-----------------------PROJECT VIEW------------------------------>
+
+        <div class = "row projectview">
+            <div class="col-lg-12">
+                <legend>View Projects</legend>
+                <div class="well well-sm">
+                    <strong>Project List</strong>
+                </div>
+                <div id="products" class="row list-group">
+                    {% for project in projects %}
+                    <div class="item col-lg-6">
+                        <div class="thumbnail">
+                            <img class="group list-group-image" src="{{ image.schematic_image.url }}" width="300px" alt="" />
+                            <div class="caption">
+                                <h2 class="group inner list-group-item-heading">{{project.project_name}}</h2>
+                                <h4 class="group inner list-group-item-text">{{project.project_description}}</h4>
+                                {% for tag in tags %}
+                                <p style="color:blue;">{{ tag.tag_name }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

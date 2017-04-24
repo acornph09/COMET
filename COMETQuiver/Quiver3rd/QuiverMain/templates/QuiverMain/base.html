@@ -20,12 +20,13 @@
         </head>
 
         <body {% block bodytag %} {% endblock bodytag %}>
+        {% block javascript %}
+
+        {% endblock javascript %}
         {% block content %}
 
         {% endblock content %}
 
-        {% block javascript %}
 
-        {% endblock javascript %}
         </body>
     </html>

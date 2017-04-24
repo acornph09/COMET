@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w.@+-]+)/$', views.view_profile, name='user profile'),
     url(r'^editprofile/$', views.edit_profile, name='update profile'),
     url(r'^project/$', views.add_project_view, name='project page'),
+    url(r'^portfolio/$', views.portfolio_view, name='portfolio page'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
